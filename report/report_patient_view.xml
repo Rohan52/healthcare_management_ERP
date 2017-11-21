@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<template id="report_patient">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h2>Patient Report</h2>
+                    <p>Patient's ID is <span t-field="o.unique_id"/></p>
+                    <p>Patient's Name is <span t-field="o.name"/></p>
+                    <p>Patient's Category is 
+                    <t t-foreach="o.category" t-as="category">
+                    <span t-field="category.name"/>,  
+                    </t>
+                    </p>
+                    <p>Patient's Birthdate is <span t-field="o.birthdate"/></p>
+                    <p>Patient's Room No is <span t-field="o.room_no"/></p>
+                    <p>Patient's Age is <span t-field="o.age"/></p>
+                    <p>Patient's Address is <span t-field="o.address"/></p>
+                    <p>Patient's Assidned Doctor is <t t-foreach="o.doctorassigned_ids" t-as="doctorassigned_ids">
+                    <span t-field="doctorassigned_ids.name"/>,  
+                    </t>
+                    </p>
+                    <p>Patient's Mobile is <span t-field="o.mobile"/></p>
+                    <p>Patient's Phone is <span t-field="o.phone"/></p>
+                    <p>Patient's Email is <span t-field="o.email"/></p>
+                    <!-- <p>Patient's facility is
+                    <t t-foreach="o.facility_id" t-as="f">
+                    <span t-esc="f.name"/>,</t></p>
+                    <p>The Patient's food type is <span t-field="o.food_id"/></p>
+                    <p>The Patient's room type is <span t-field="o.roomtype_id"/></p> --> 
+                	<table class="table table-condensed">
+                	<thead>
+                    <tr>
+                        <th class="text-left">Description</th>
+                        <th class="hidden">Source Document</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-right">Price</th>
+                    </tr>
+                	</thead>
+                	
+                	<tbody>
+                	<tr>
+                	    <t t-set="t1" t-value="0"/>
+                	    <td>
+                	       <p>Food</p> 
+                	    </td>
+                	    <td class="text-center">
+                	       <p><span t-field="o.food_id"/></p> 
+                	    </td>
+                	    <td class="text-right">
+                	       <p><span t-field="o.food_id.price"/></p> 
+                	       <t t-set="t1" t-value="o.food_id.price+t1"/> 
+                	    </td>
+                	</tr>
+                	<tr>
+                	    <td>
+                	       <p>Room <span t-field="o.roomtype_id"/></p> 
+                	    </td>
+                	    <td class="text-center">
+                	       <p><span t-field="o.roomtype_id"/></p> 
+                	    </td>
+                	    <td class="text-right">
+                	       <p><span t-field="o.roomtype_id.price"/></p>
+                	       <t t-set="t1" t-value="o.roomtype_id.price+t1"/>  
+                	    </td>
+                	</tr>
+                	<tr>
+                	    <td>
+                	       <p>Facilities</p> 
+                	    </td>
+                	    <td class="text-center">
+                	        <p>
+                	        <ol>
+                	           <t t-foreach="o.facility_id" t-as="f"><li><span t-esc="f.name"/></li></t>               	                
+                	        </ol>
+                    	    </p> 
+                	    </td>
+                	    <td class="text-right">
+                	        <p>
+                	        <ul style="list-style-type:none">
+                	           <t t-foreach="o.facility_id" t-as="f"><li><span t-esc="f.price"/></li></t>               	                
+                	        </ul>
+                    	    </p> 
+                	    </td>
+                	</tr>
+                	
+                	
+                	<tr>
+                	   <td></td>
+                	   <td></td>
+                	    <td class="text-right">
+                	    
+						<t t-foreach="o.facility_id" t-as="i"> 
+						  <t t-set="t1" t-value="i.price+t1"/> 
+						</t>
+						
+						<h1>TOTAL= <t t-esc="t1"/></h1>
+						</td>
+                	</tr>
+                    <!-- <tr t-foreach="o.facility_id" t-as="l">
+                    <tr>
+                        <td><span t-field="l.name"/></td>
+                        <td><span t-field="l.price"/></td>
+                    </tr> -->
+                	</tbody>
+                	</table>
+                </div>
+            </t>
+            
+        </t> 
+    </t>
+</template>
+</odoo>

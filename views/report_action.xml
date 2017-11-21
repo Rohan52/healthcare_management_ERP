@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="account_invoices"
+        name="account.report_invoice"
+        file="account.report_invoice"
+        model="patient.patient"
+        report_type="qweb-pdf"
+        string="Invoices" />
+
+</odoo>
